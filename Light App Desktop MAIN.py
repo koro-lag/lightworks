@@ -11,12 +11,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Importing Images / Icons
-def load_image(name):  
-    return ctk.CTkImage(Image.open(os.path.join("Images", name)), size=(40, 40))
+# def load_image(name):  
+#    return ctk.CTkImage(Image.open(os.path.join("Images", name)), size=(40, 40))
 
-focus_img = load_image("focus.png")
-ambient_img = load_image("ambient.png")
-manual_img = load_image("manual.png")
+# focus_img = load_image("focus.png")
+# ambient_img = load_image("ambient.png")
+# manual_img = load_image("manual.png")
 
 '''Initialise Variables & Constants'''
 
