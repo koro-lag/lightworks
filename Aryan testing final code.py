@@ -1,4 +1,4 @@
-import time
+import time 
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
@@ -18,55 +18,48 @@ SPI_PORT = 0
 SPI_DEVICE = 0
 mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-#print(mcp.read_adc(0))
-
 def avgADC(samples = 5):
-	readings = []
-	
-	led.ChangeDutyCycle(0)
-	time.sleep(0.005)
-	
-	for _ in range(samples):
-		readings.append(mcp.read_adc(0))
-		time.sleep(0.001) 
-		
-	return sum(readings)/len(readings)
+    readings = []
+    
+    led.ChangeDutyCycle(0)
+    time.sleep(0.005)
+    
+    for _ in range(samples):
+        readings.append(mcp.read_adc(0))
+        time.sleep(0.001) 
+        
+    return sum(readings)/len(readings)
 
 def pwmFromADC(avgADC):
-	if 0 < avgADCValue < 420:
-		return 100
-	elif 421 < avgADCValue < 740:
-		return 50
-	else:
-		return 0
-
-#lastDC = None
+    if 0 < avgADC < 420:
+        return 100
+    elif 421 < avgADC < 740:
+        return 50
+    else:
+        return 0
 
 with open(csvFileName, 'a', newline="") as file:
-	csv_writer = csv.DictWriter(file, fieldnames=fieldNames)
+    csv_writer = csv.DictWriter(file, fieldnames=fieldNames)
+    try:
+        while True:
+            avgADCValue = avgADC()
+            dc = pwmFromADC(avgADCValue)
+            led.ChangeDutyCycle(dc)
+            time.sleep(0.0000000000001)
+            
+            currTime = datetime.now().strftime("%H:%M:%S")
+            
+            info = {
+                "time": currTime,
+                "duty_cycle": dc
+            }
+            csv_writer.writerow(info)
+            
+            print(currTime, dc)
+            
+            file.flush()
+            time.sleep(5)
+    except KeyboardInterrupt:
+        led.stop()
+        GPIO.cleanup()
 
-try:
-	while True:
-		
-		avgADCValue = avgADC()
-		dc = pwmFromADC(avgADCValue)
-		led.ChangeDutyCycle(dc)
-		time.sleep(0.0000000000001)
-		
-		
-		currTime = datetime.now().strftime("%H:%M:%S")
-		
-		info = {
-			"time": currTime,
-			"duty_cycle": dc
-			}
-		csv_writer.writerow(info)
-		
-		print(currTime, dc)
-		
-		file.flush()
-		time.sleep(5)
-
-except KeyboardInterrupt:
-	led.stop()
-	GPIO.cleanup()
