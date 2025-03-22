@@ -26,6 +26,7 @@
 - 'LDT Output Circuit Diagram.docx' *(contains in depth explanation of circuit design)*
 
 
+
 # PROJECT SUMMARY
 
 The Light-Emitting Diode is one of the greatest inventions of the 20th century. Since the early 2000s, LED light bulbs have been praised for their lifespan and energy-saving capabilities—they use at least 75% less energy and last up to 25 times longer than incandescent bulbs.
@@ -53,6 +54,7 @@ Our program has been developed to work alongside our live dimming technology. It
 The Program consists of two modules. The first module, “Analytics”, provides real-time data on several statistics of a lighting system, such as total power consumption, energy consumption, CO2e emissions, and electricity saved. Currently, it is only based on a single LED, and we are currently working on using it with systems of LEDs. This tool would be beneficial for commercial use, giving shopping malls and offices better insight into their energy use.
 
 The second module, “Forecast”, is a prediction model that we have developed for households to demonstrate the tremendous energy savings achieved when switching from halogens, incandescent, and CFL light bulbs to LEDs. It also shows the further energy savings achieved if all the light bulbs used LDT.
+
 
 # VIDEOS
 ## 5 Minute Presentation
