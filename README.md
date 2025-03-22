@@ -1,4 +1,4 @@
-**PROJECT SUMMARY**
+# PROJECT SUMMARY
 
 The Light-Emitting Diode is one of the greatest inventions of the 20th century. Since the early 2000s, LED light bulbs have been praised for their lifespan and energy-saving capabilities—they use at least 75% less energy and last up to 25 times longer than incandescent bulbs.
 
@@ -10,7 +10,7 @@ Our project has been dedicated to finding a solution to these issues—approachi
 
 Below, we speak briefly about both solutions (a more in-depth explanation is available in our video and GitHub repository).
 
-**Live Dimming Technology**
+### Live Dimming Technology
 
 We tackled the issue of excess lighting by automatically adjusting light according to ambient conditions. In the past, this typically involved using a sensor that measured external brightness and fed a PWM controller that adjusted the LED output. A limitation of this technology is that to avoid positive feedback, designers usually must physically shield the sensor from the LED. This reduces the uses of this technology – many spaces do not have naturally unlit areas.
 
@@ -18,10 +18,20 @@ LDT differs from current-day technology by having the LED temporarily turned off
 
 We have demonstrated this technology in the footprint of a lamp and are working toward fitting it into a standard light bulb.
 
-**The Program**
+### The Program
 
 Our program has been developed to work alongside our live dimming technology. It directly tackles the lack of information around lighting by providing interactive tools to make consumers more conscious of their lighting use. It also provides estimates of energy/cost savings and CO2e prevention if lighting systems used our technology.
 
 The Program consists of two modules. The first module, “Analytics”, provides real-time data on several statistics of a lighting system, such as total power consumption, energy consumption, CO2e emissions, and electricity saved. Currently, it is only based on a single LED, and we are currently working on using it with systems of LEDs. This tool would be beneficial for commercial use, giving shopping malls and offices better insight into their energy use.
 
 The second module, “Forecast”, is a prediction model that we have developed for households to demonstrate the tremendous energy savings achieved when switching from halogens, incandescent, and CFL light bulbs to LEDs. It also shows the further energy savings achieved if all the light bulbs used LDT.
+
+# NAVIGATION AROUND THIS REPOSITORY
+
+
+# VIDEOS
+## 5 Minute Presentation
+[![Presentation video](https://img.youtube.com/vi/OyPKLj0iM8w/0.jpg)](https://youtu.be/OyPKLj0iM8w)
+
+## Demonstration
+[![Demonstration video](https://img.youtube.com/vi/xpUQCLLk9Fk/0.jpg)](https://youtu.be/xpUQCLLk9Fk)
