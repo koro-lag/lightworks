@@ -1,4 +1,7 @@
-# PROJECT SUMMARY
+# NAVIGATION
+
+
+# 500-WORD PROJECT SUMMARY
 
 The Light-Emitting Diode is one of the greatest inventions of the 20th century. Since the early 2000s, LED light bulbs have been praised for their lifespan and energy-saving capabilities—they use at least 75% less energy and last up to 25 times longer than incandescent bulbs.
 
@@ -8,7 +11,7 @@ Another issue regarding lighting is humans themselves. Even if LEDs were impleme
 
 Our project has been dedicated to finding a solution to these issues—approaching it in two ways. We have developed a program that aims to promote energy savings by making consumers more conscious of their energy use. We have also innovated a new mechanism called LDT (Live Dimming Technology) that we estimate can make LEDs around 30% more efficient.
 
-Below, we speak briefly about both solutions (a more in-depth explanation is available in our video and GitHub repository).
+Below, we speak briefly about both solutions.
 
 ### Live Dimming Technology
 
@@ -25,9 +28,6 @@ Our program has been developed to work alongside our live dimming technology. It
 The Program consists of two modules. The first module, “Analytics”, provides real-time data on several statistics of a lighting system, such as total power consumption, energy consumption, CO2e emissions, and electricity saved. Currently, it is only based on a single LED, and we are currently working on using it with systems of LEDs. This tool would be beneficial for commercial use, giving shopping malls and offices better insight into their energy use.
 
 The second module, “Forecast”, is a prediction model that we have developed for households to demonstrate the tremendous energy savings achieved when switching from halogens, incandescent, and CFL light bulbs to LEDs. It also shows the further energy savings achieved if all the light bulbs used LDT.
-
-# NAVIGATION AROUND THIS REPOSITORY
-
 
 # VIDEOS
 ## 5 Minute Presentation
