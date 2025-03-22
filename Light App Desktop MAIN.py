@@ -2,26 +2,15 @@
 # For App
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from customtkinter import CTkImage
-from PIL import Image
-import os
 
 # For Live Graphs
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Importing Images / Icons
-# def load_image(name):  
-#     return ctk.CTkImage(Image.open(os.path.join('Images', name)), size=(40, 40))
-# 
-# focus_img = load_image('focus.png')
-# ambient_img = load_image('ambient.png')
-# manual_img = load_image('manual.png')
-
 '''Initialise Variables & Constants'''
 
 DAYS_IN_YEARS = 365.25
-HOURS_PER_DAY = 3.9
+HOURS_PER_DAY = 4.0
 COST_PER_KWH = 27.03 # Current cost of electricty p/kWh
 CO2_PER_KWH = 0.207074 # CO2 equivalent kg/kWh
 
@@ -42,23 +31,15 @@ C_PEOPLE_COUNT= 2
 C_ROOM_COUNT =  5 # Living room, kitchen, 2 bedrooms, bathroom
 
 # For Analytics
-energy_with_ldl = float(0)
-energy_without_ldl = float(0)
-energy_savings = float(0)
-co2_emissions = float(0)
-time_passed = float(0)
-
-# For Forecast
-# incandescent_count = int(0)
-# halogen_count = int(0)
-# cfl_count = int(0)
-# led_count = int(0)
-# room_count = int(0)
-# people_count = int(0)
+energy_with_ldl = 0.0
+energy_without_ldl = 0.0
+energy_savings = 0.0
+co2_emissions = 0.0
+time_passed = 0.0
 
 # Forecast Model ---------------------------------------------------------------------------------------------
 
-def forecast_model(*args):
+def forecast_model(*args): # Converting widget entries to integers, defaulting if invalid input
 
     try:
         num_room = int(room_count.get())
@@ -85,21 +66,23 @@ def forecast_model(*args):
     except ValueError:
         num_led = 0
 
-    # print("Updated Lightbulb Counts:")
-    # print(f"Rooms: {num_room}, People: {num_people}, Incandescent: {num_incandescent}, Halogen: {num_halogen}, CFL: {num_cfl}, LED: {num_led}")
-
     total_watts = (num_incandescent)*(INCANDESCENT_POWER) + (num_halogen)*(HALOGEN_POWER) + (num_cfl)*(CFL_POWER) + (num_led)*(LED_POWER)
     annual_energy = (total_watts/1000)*(HOURS_PER_DAY)*(DAYS_IN_YEARS)*(num_people/num_room)
     annual_cost = (annual_energy)*(COST_PER_KWH)
     annual_co2 = (annual_energy)*(CO2_PER_KWH)
 
-    current_electricty_usage.configure(text = f"Electricty Usage = {annual_energy:.3g} kWh")
-    current_light_bill.configure(text = f"CO2 Emissions = {annual_cost:.2f} kg")
-    current_co2_emissions.configure(text = f"Electricty Bill = £{annual_co2:.2f}")
+    ldt_total_watts = (num_incandescent + num_halogen + num_cfl + num_led)*(LED_POWER*0.7)
+    ldt_annual_energy = (ldt_total_watts/1000)*(HOURS_PER_DAY)*(DAYS_IN_YEARS)*(num_people/num_room)
+    ldt_annual_cost = (ldt_annual_energy)*(COST_PER_KWH)
+    ldt_annual_co2 = (ldt_annual_energy)*(CO2_PER_KWH)
 
-    ldt_electricty_usage.configure(text = f"Electricty Usage = {(annual_energy*0.7):.3g} kWh")
-    ldt_light_bill.configure(text = f"CO2 Emissions = {(annual_cost*0.7):.2f} kg")
-    ldt_co2_emissions.configure(text = f"Electricty Bill = £{(annual_co2*0.7):.2f}")
+    current_electricty_usage.configure(text = f"Electricty Usage = {annual_energy:.3g} kWh")
+    current_light_bill.configure(text = f"CO2e Emissions = {annual_cost:.2f} kg")
+    current_co2_emissions.configure(text = f"Light Electricty Bill = £{annual_co2:.2f}")
+
+    ldt_electricty_usage.configure(text = f"Electricty Usage = {(ldt_annual_energy):.3g} kWh")
+    ldt_light_bill.configure(text = f"CO2e Emissions = {(ldt_annual_cost):.2f} kg")
+    ldt_co2_emissions.configure(text = f"Light Electricty Bill = £{(ldt_annual_co2):.2f}")
 
 def reset_to_census():
 
@@ -122,15 +105,15 @@ plt.style.use('seaborn-v0_8')
 def update_power_consumption_graph():
     data = pd.read_csv('sensor_data.csv')
     
-    time = data['time']
-    power = MAX_VOLTAGE * CURRENT * data['duty_cycle'] # P = I * V * Duty Cycle (to get average V)
+    time = data['time'][-20:]
+    power = (MAX_VOLTAGE * CURRENT * data['duty_cycle'])[-20:]
     
     ax_1.clear()
     ax_1.set_xlabel('Time')
     ax_1.set_ylabel('Power Consumption (W)')
     ax_1.plot(time, power)
+    ax_1.set_xlim(time.iloc[0], time.iloc[-1])
 
-    # Dynamically adjust the x-axis to avoid too many data points
     if len(time) > 6:  
         step = max(1, len(time) // 6)
         ax_1.set_xticks(range(0, len(time), step))
@@ -154,7 +137,8 @@ def update_energy_consumption_graph():
     
     data = pd.read_csv('sensor_data.csv')
 
-    energy_with_ldl += (MAX_VOLTAGE * CURRENT * data.iloc[-1]['duty_cycle']) * (INTERVAL / 3600) # E = I * V * t * Duty Cycle (to get average V)
+    energy_with_ldl += (MAX_VOLTAGE * CURRENT * (1 - data.iloc[-1]['duty_cycle']) * INTERVAL / 3600) * (COST_PER_KWH / 1000)
+ # E = I * V * t * Duty Cycle (to get average V)
     energy_without_ldl += (MAX_VOLTAGE * CURRENT) * (INTERVAL / 3600) # E = I * V * t 
 
     ax_2.clear()
@@ -380,7 +364,7 @@ current_forecast_label.pack()
 current_electricty_usage = ctk.CTkLabel(current_forecast_frame, text = "Electricty Usage = 0 kWh", font = ('Helvetica Neue', 14))
 current_electricty_usage.pack()
 
-current_light_bill = ctk.CTkLabel(current_forecast_frame, text = "Electricty Bill = £0.00", font = ('Helvetica Neue', 14))
+current_light_bill = ctk.CTkLabel(current_forecast_frame, text = "Light Electricty Bill = £0.00", font = ('Helvetica Neue', 14))
 current_light_bill.pack()
 
 current_co2_emissions = ctk.CTkLabel(current_forecast_frame, text = "CO2 Emissions = 0.0 kg", font = ('Helvetica Neue', 14))
@@ -396,7 +380,7 @@ ldt_forecast_label.pack()
 ldt_electricty_usage = ctk.CTkLabel(ldt_forecast_frame, text = "Electricty Usage = 0 kWh", font = ('Helvetica Neue', 14))
 ldt_electricty_usage.pack()
 
-ldt_light_bill = ctk.CTkLabel(ldt_forecast_frame, text = "Electricty Bill = £0.00", font = ('Helvetica Neue', 14))
+ldt_light_bill = ctk.CTkLabel(ldt_forecast_frame, text = "Light Electricty Bill = £0.00", font = ('Helvetica Neue', 14))
 ldt_light_bill.pack()
 
 ldt_co2_emissions = ctk.CTkLabel(ldt_forecast_frame, text = "CO2 Emissions = 0.0 kg",font = ('Helvetica Neue', 14))
@@ -462,17 +446,8 @@ led_count = ctk.CTkComboBox(parameters_frame, width = 70, values = lightbulb_cou
 led_count.grid(row=6, column=1, sticky = 'w')
 
 # Reset to Census Button
-
 c_reset = ctk.CTkButton(parameters_frame, text = "Reset to Census", width = 70, command = reset_to_census)
 c_reset.grid(row= 7, column = 0, columnspan = 2)
-
-
-
-
-
-
-
-
 
 # Start live updates
 update_power_consumption_graph()
