@@ -1,4 +1,6 @@
 # NAVIGATION
+*Below are descriptions of the contents of each file on this repository*
+
 ### Source Code
 - 'Light App.py' *(contains main program with analytics and forecast module)*
 
@@ -22,9 +24,6 @@
 - 'LDT Input Circuit Diagram.docx' *(contains in depth explanation of circuit design)*
 
 - 'LDT Output Circuit Diagram.docx' *(contains in depth explanation of circuit design)*
-
-### Progress Videos
-*Contains videos of milestones made during our project*
 
 
 # PROJECT SUMMARY
