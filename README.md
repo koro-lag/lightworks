@@ -1,7 +1,7 @@
 # NAVIGATION
 
 
-# 500-WORD PROJECT SUMMARY
+# PROJECT SUMMARY
 
 The Light-Emitting Diode is one of the greatest inventions of the 20th century. Since the early 2000s, LED light bulbs have been praised for their lifespan and energy-saving capabilities—they use at least 75% less energy and last up to 25 times longer than incandescent bulbs.
 
