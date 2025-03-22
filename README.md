@@ -11,7 +11,7 @@
 ### Software & Hardware List
 - 'Components List.xlsx' *(spreadsheet contains more readable version of materials used for project)*
 
-## Instructions
+### Instructions
 - 'Figure 1.png' – Figure 8.png *(figures mentioned for instructions question on the submission form)*
 
 - 'Instructions (with embedded figures).docx' *(document contains more readable version of instructions)*
