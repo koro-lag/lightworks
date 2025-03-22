@@ -1,4 +1,30 @@
 # NAVIGATION
+### Source Code
+- Light App.py *(contains main program with analytics and forecast module)*
+
+- LDT Code.py *(code for Live Dimming Technology)*
+
+- Dummy Duty Cycle Generator.py *(random mark to space ratio generator to test live graphs)*
+
+- sensor_data.csv *(file that stores and updates mark to space ratio values for live graphs)*
+
+### Software & Hardware List
+- Components List.xlsx *(spreadsheet contains more readable version of materials used for project)*
+
+## Instructions
+- Figure 1.png – Figure 8.png *(figures mentioned for instructions question on the submission form)*
+
+- Instructions (with embedded figures).docx *(document contains more readable version of instructions)*
+
+### Research
+- Forecast Model Specification.docx *(contains cited research into the program’s constants and formulas for calculations)*
+
+- LDT Input Circuit Diagram.docx *(contains in depth explanation of circuit design)*
+
+- LDT Output Circuit Diagram.docx *(contains in depth explanation of circuit design)*
+
+### Progress Videos
+*Contains videos of milestones made during our project*
 
 
 # PROJECT SUMMARY
