@@ -14,9 +14,12 @@
 - 'Components List.xlsx' *(spreadsheet contains more readable version of materials used for project)*
 
 ### Instructions
-- 'Figure 1.png' – 'Figure 8.png' *(figures mentioned for instructions question on the submission form)*
+- 'Figure 1.png' to 'Figure 8.png' *(figures mentioned for instructions question on the submission form)*
 
 - 'Instructions (with embedded figures).docx' *(document contains more readable version of instructions)*
+
+### Design
+- 'Lamp RIG.stl' *(3D print model of rig for circuitry of lamp)
 
 ### Research
 - 'Forecast Model Specification.docx' *(contains cited research into the program’s constants and formulas for calculations)*
