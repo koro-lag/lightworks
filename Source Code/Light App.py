@@ -10,18 +10,19 @@ import matplotlib.pyplot as plt
 '''Initialise Variables & Constants'''
 
 DAYS_IN_YEARS = 365.25
-HOURS_PER_DAY = 4.0
+HOURS_PER_DAY = 4.0 # Hours per day lights are used
 COST_PER_KWH = 27.03 # Current cost of electricty p/kWh
 CO2_PER_KWH = 0.207074 # CO2 equivalent kg/kWh
 
+# WATTS of each lightbulb type
 INCANDESCENT_POWER = 60
 HALOGEN_POWER = 45
 CFL_POWER = 15
 LED_POWER = 8
 
-MAX_VOLTAGE = 12 # Volts
+MAX_VOLTAGE = 12
 CURRENT = 0.2 # Current going to LDT light circuit
-INTERVAL = 5
+INTERVAL = 5 # Graph updates every x seconds
 
 C_INCANDSCENT_COUNT = 2
 C_HALOGEN_COUNT = 3
@@ -112,9 +113,9 @@ def update_power_consumption_graph():
     ax_1.set_xlabel('Time')
     ax_1.set_ylabel('Power Consumption (W)')
     ax_1.plot(time, power)
-    ax_1.set_xlim(time.iloc[0], time.iloc[-1])
+    ax_1.set_xlim(time.iloc[0], time.iloc[-1]) # When too many data points, graph starts discarding older ones
 
-    if len(time) > 6:  
+    if len(time) > 6: # Dynamically adjust the x-axis if it gets too crowded
         step = max(1, len(time) // 6)
         ax_1.set_xticks(range(0, len(time), step))
         ax_1.set_xticklabels(time[::step])
@@ -137,9 +138,8 @@ def update_energy_consumption_graph():
     
     data = pd.read_csv('sensor_data.csv')
 
-    energy_with_ldl += (MAX_VOLTAGE * CURRENT * (1 - data.iloc[-1]['duty_cycle']) * INTERVAL / 3600) * (COST_PER_KWH / 1000)
- # E = I * V * t * Duty Cycle (to get average V)
-    energy_without_ldl += (MAX_VOLTAGE * CURRENT) * (INTERVAL / 3600) # E = I * V * t 
+    energy_with_ldl += (MAX_VOLTAGE * CURRENT * (1 - data.iloc[-1]['duty_cycle']) * INTERVAL / 3600) # E = I * V * t * (J to Wh conversion) * Duty Cycle (to get average V)
+    energy_without_ldl += (MAX_VOLTAGE * CURRENT) * (INTERVAL / 3600) # E = I * V * t * (J to Wh conversion)
 
     ax_2.clear()
     ax_2.bar(['With LDL', 'Without LDL'], [energy_with_ldl, energy_without_ldl])
@@ -170,8 +170,6 @@ def update_labels():
     energy_savings += (MAX_VOLTAGE * CURRENT * COST_PER_KWH/1000) * (1 - data.iloc[-1]['duty_cycle']) * (INTERVAL / 3600)
     co2_emissions += (MAX_VOLTAGE * CURRENT) * data.iloc[-1]['duty_cycle'] * CO2_PER_KWH * (INTERVAL / 3600)
     
-    # (energy_without_ldl - energy_with_ldl) * ENERGY_COST
-
     energy_savings_label.configure(text=f'Estimated energy savings: {energy_savings:.4f} Wh')
     co2_emissions_label.configure(text=f'Estimated CO2 emissions: {co2_emissions:.4f} g')
 
