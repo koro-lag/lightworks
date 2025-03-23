@@ -7,7 +7,7 @@ import csv
 # Constants
 MIN_DUTY = 0
 MAX_DUTY = 1 # Max Power of LED
-DUTY_CYCLE_VARIATION = 0.25
+DUTY_CYCLE_VARIATION = 0.5
 
 # Initialise Variables
 duty_cycle = 0.5
@@ -25,7 +25,7 @@ with open('sensor_data.csv', 'a', newline='') as file:
         while True:
             current_time = datetime.now().strftime("%H:%M:%S")
 
-            duty_cycle += random.uniform(-DUTY_CYCLE_VARIATION, DUTY_CYCLE_VARIATION)
+            duty_cycle += random.choice([-DUTY_CYCLE_VARIATION, 0, 0, DUTY_CYCLE_VARIATION])
 
             # Ensure duty cycle stays within bounds
             duty_cycle = max(MIN_DUTY, min(duty_cycle, MAX_DUTY))
