@@ -19,7 +19,7 @@
 - 'Instructions (with embedded figures).docx' *(document contains more readable version of instructions)*
 
 ### Design
-- 'Lamp RIG.stl' *(3D print model of rig for circuitry of lamp)
+- 'Lamp RIG.stl' *(3D print model of rig for circuitry of lamp)*
 
 ### Research
 - 'Forecast Model Specification.docx' *(contains cited research into the program’s constants and formulas for calculations)*
