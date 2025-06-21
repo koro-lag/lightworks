@@ -8,8 +8,9 @@ import csv
 import pandas as pd
 import matplotlib.pyplot as plt
 
-with open('control_module.csv', "a", newline='') as file:
+with open('control_module.csv', "w", newline='') as file:
     csv_writer = csv.DictWriter(file, fieldnames = ["mode", "dc"])
+    csv_writer.writeheader()
 
 def focus_mode():
     with open('control_module.csv', "a", newline='') as file:
@@ -78,7 +79,7 @@ focus_button = ctk.CTkButton(mode_frame, width = 60, height = 60,
                              )
 focus_button.pack(padx = 10, side = 'left')
 
-# Ambient Mode (medium mark to space ratio thresholds)
+# Ambient Mode (low mark to space ratio thresholds)
 ambience_button = ctk.CTkButton(mode_frame, width = 60, height = 60, 
                                #image = ambient_img,
                                text = None,
@@ -89,7 +90,7 @@ ambience_button = ctk.CTkButton(mode_frame, width = 60, height = 60,
                                
 ambience_button.pack(padx = 10, side = 'left')
 
-# Eco Mode (low mark to space ratio thresholds)
+# Manual Mode (manual space ratio thresholds)
 manual_button = ctk.CTkButton(mode_frame, width = 60, height = 60, 
                               #image = manual_img,
                               text = None,
@@ -119,10 +120,6 @@ brightness_slider.grid(row=0, column=1)
 # On Label
 brightness_on_label = ctk.CTkLabel(brightness_frame, text = 'On', font = ('Helvetica Neue', 12))
 brightness_on_label.grid(row=0, column=2, padx=(5,0))
-
-# Manual Mode (turns off LDT)
-LDT_toggle = ctk.CTkCheckBox(brightness_frame, text = "Auto-dimming", font = ('Helvetica Neue', 12))
-LDT_toggle.grid(row=1, column=0, columnspan=3, pady=(10,0))
 
 
 # Prevents window from closing automatically

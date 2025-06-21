@@ -1,18 +1,7 @@
+mode,dc
 focus,0
 ambience,0
+ambience,0
 focus,0
 ambience,0
-ambience,0
-ambience,0
-ambience,0
-ambience,0
-manual,<function duty_cycle at 0x000002CD03807A30>
-manual,<function duty_cycle at 0x000002CD03807A30>
-manual,50.0
-manual,50.0
-manual,50.0
-manual,50.0
-manual,50.0
-manual,50.0
-manual,50.0
 manual,20.0
