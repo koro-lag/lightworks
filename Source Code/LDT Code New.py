@@ -21,7 +21,7 @@ SPI_PORT = 0
 SPI_DEVICE = 0
 mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-modeSetting = pd.read_csv("") #Enter file name!
+modeSetting = pd.read_csv("control_module.csv")
 mode = modeSetting.iloc[0,-1] #Reading last value of first column?
 
 csvFileName = "sensor_data.csv" #CSV file is named sensor_data
@@ -59,7 +59,7 @@ def pwmFocus(avgADC):
         return 50
     
 def manualMode():
-    modeSetting = pd.read_csv("") #Enter file name!
+    modeSetting = pd.read_csv("control_module.csv") 
     dc = modeSetting.iloc[1,-1]
     return dc
 
