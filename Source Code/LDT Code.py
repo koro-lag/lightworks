@@ -4,6 +4,10 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import csv
 from datetime import datetime 
+import pandas as pd
+
+file = pd.read_csv("")
+mode = file.iloc[0,-1]
 
 csvFileName = "sensor_data.csv" # CSV file is named sensor_data
 fieldNames = ["time", "duty_cycle"] # Row headings are 'time' and 'duty_cycle' respectively
